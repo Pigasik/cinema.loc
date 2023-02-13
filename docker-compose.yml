@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html
+            - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - php-fpm
+            - mysql
+    php-fpm:
+        container_name: php_cinema
+        environment:
+            PHP_IDE_CONFIG: "serverName=cinema"
+        build:
+          dockerfile: docker/php/Dockerfile
+          context: .
+        volumes:
+            - ./:/var/www/html
+        links:
+            - mysql
+    mysql:
+        container_name: cinema_db
+        image: mariadb:10.3
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=cinema
