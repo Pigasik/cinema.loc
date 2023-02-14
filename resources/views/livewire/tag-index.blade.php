@@ -9,16 +9,10 @@
             <thead class="border-b bg-gray-800">
               <tr>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Title
+                  Tags
                 </th>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Date
-                </th>
-                <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Rating
-                </th>
-                <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Public
+                  Slug
                 </th>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                     Action
@@ -26,21 +20,29 @@
               </tr>
             </thead class="border-b">
             <tbody>
+              @foreach($tags as $tag)
               <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Title</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rating</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Public</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Edit and Delete</td>
-                
-               
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$tag->tag_name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$tag->slug}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <x-jet-button wire:click="editTag({{ $tag->id }})"
+                    class="text-white">Edit</x-jet-button>
+                <x-jet-button wire:click="deleteTag({{ $tag->id }})"
+                    class="text-white">Delete</x-jet-button>
+                </td>
+              </tr> 
+              @endforeach  
             </tbody>
           </table>
         </div>
       </div>
     </div>
     <x-jet-dialog-modal wire:model="showCreate">
+      @if ($tagId)
+      <x-slot name="title">Edit Tag</x-slot>         
+      @else
       <x-slot name="title">Create Tag</x-slot>
+      @endif
       <x-slot name="content">
         <div class="flex justify-center">
           <div class="mb-3 w-full">
@@ -50,7 +52,11 @@
         </div>
       </x-slot>
       <x-slot name="footer">
+        @if ($tagId)
+        <x-jet-button wire:click="updateTag">Edit</x-jet-button>
+        @else
         <x-jet-button wire:click="createTag">Save</x-jet-button>
+        @endif
         <x-jet-button class="px-4" wire:click="closeCreateTag">Close</x-jet-button>
       </x-slot>
     </x-jet-dialog-model>
