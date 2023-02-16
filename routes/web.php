@@ -32,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->prefix('admin')->
     Route::get('series/{serie}/seasons', SeasonIndex::class)->name('seasons.index');
     Route::get('series/{serie}/seasons/{season}/episodes', EpisodeIndex::class)->name('episodes.index');
     Route::get('genres', GenreIndex::class)->name('genres.index');
+    
     Route::get('casts', CastIndex::class)->name('casts.index');
     Route::get('tags', TagIndex::class)->name('tags.index');
 });
