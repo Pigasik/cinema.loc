@@ -20,8 +20,8 @@ class CastIndex extends Component
         $newCast = Http::get('https://api.themoviedb.org/3/person/10580?api_key=1d7a93431099a07e3032306e6032da45&language=en-USS')->json();
         Cast::create([
             'tmdb_id' => $newCast['id'],
-            'name'    => $newCast['name'],
-            'slug'    => Str::slug($newCast['name']),
+            'name' => $newCast['name'],
+            'slug' => Str::slug($newCast['name']),
             'poster_path' => $newCast['profile_path']
         ]);
     }

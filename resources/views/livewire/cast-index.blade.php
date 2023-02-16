@@ -31,10 +31,9 @@
             <tbody>
               @foreach ($casts as $cast)
               <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Title</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rating</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Public</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$cast->name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$cast->slug}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$cast->poster_path}}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Edit and Delete</td>
               </tr>
                @endforeach
