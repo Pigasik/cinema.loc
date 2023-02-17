@@ -32,12 +32,11 @@ class CastIndex extends Component
             'slug' => Str::slug($newCast['name']),
             'poster_path' => $newCast['profile_path']
         ]); 
+        $this->reset();
         } else{
             $this->dispatchBrowserEvent('banner-message', ['style' => 'denger', 'message' => 'Invalid TMDBId']);
     
         }
-        $this->reset();
-        
     }
 
     public function editCast($id){

@@ -24,23 +24,23 @@ class GenreIndex extends Component
         $newGenre = Http::get('https://api.themoviedb.org/3/genre/'. $this->tmdbId .'?api_key=1d7a93431099a07e3032306e6032da45&language=en-US')->json();
         $genre = Genre::where('tmdb_id', $newGenre['id'])->first();
         if(!$genre){
-           Genre::create([
+            Genre::create([
             'tmdb_id' => $newGenre['id'],
             'title' => $newGenre['name'],
             'slug' => Str::slug($newGenre['name'])
-        ]); 
+        ]);
+        $this->reset();
         } else{
             $this->dispatchBrowserEvent('banner-message', ['style' => 'denger', 'message' => 'Invalid TMDBId']);
     
         }
-        $this->reset();
         
     }
 
     public function editGenre($id){
         $this->genreId = $id;
         $this->loadGenre();
-        $this->showEdit = true; 
+        $this->showEdit = true;
     }
 
     public function loadGenre(){
@@ -57,7 +57,7 @@ class GenreIndex extends Component
         $this->validate();
         $genre = Genre::findOrFail($this->genreId);
         $genre->update([
-            'title' => $this->title
+            'title' => $this->title,
         ]);
         $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Genre updated']);
         $this->reset();
