@@ -22,6 +22,7 @@ class GenreIndex extends Component
 
     public function generateGenre(){
         $newGenre = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=1d7a93431099a07e3032306e6032da45&language=en-US')->json();
+        foreach($newGenre as $genre){
         $genre = Genre::where('tmdb_id', $newGenre['id'])->first();
         if(!$genre){
             Genre::create([
@@ -32,7 +33,7 @@ class GenreIndex extends Component
         $this->reset();
         } else{
             $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Invalid TMDBId']);
-        }
+        }}
     }
 
     public function editGenre($id){
