@@ -36,6 +36,7 @@ class CastIndex extends Component
             $this->dispatchBrowserEvent('banner-message', ['style' => 'denger', 'message' => 'Invalid TMDBId']);
     
         }
+        $this->reset();
         
     }
 
