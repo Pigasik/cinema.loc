@@ -54,6 +54,7 @@ class TagIndex extends Component
         $this->reset();
         $this->tags = Tag::all();
         $this->showCreate = false;
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Tag created successfully']);
     }
 
     public function deleteTag($tagId){
