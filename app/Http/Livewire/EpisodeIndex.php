@@ -62,7 +62,7 @@ class EpisodeIndex extends Component
             }
         } else {
             $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Episode not exists']);
-            $this->reset('seasonNumber');
+            $this->reset('episodeNumber');
         }
     }
 
