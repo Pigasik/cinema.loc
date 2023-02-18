@@ -1,43 +1,99 @@
 <div class="flex flex-col">
-    <div class="w-full flex mb-4 p-2 justify-end">
-        <x-jet-button>Create Serie</x-jet-button>
+  <div class="w-full flex mb-4 p-2 justify-end">
+    <div class="flex justify-center">
+      <div class="mb-1 w-full">
+        <label for="tmdb_id_g" class="form-label inline-block mb-2 text-gray-700">Serie ID</label>
+        <input wire:model="tmdbId" id="tmdb_id_g" name="tmdb_id_g" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"/>
+      </div>
     </div>
+    <x-jet-button wire:click="generateSerie">Generate</x-jet-button>  
+  </div>
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      
+      <div class="py-4 inline-block w-1/2 sm:px-6 lg:px-8">
+        <div class="relative">
+            <input wire:model="search" type="text" placeholder="Search by name"
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
+        </div>
+    </div>
+
       <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
           <table class="w-full text-center">
             <thead class="border-b bg-gray-800">
               <tr>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Title
+                  Name
                 </th>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Date
+                  Slug
                 </th>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Rating
+                  Created year
                 </th>
                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                  Public
-                </th>
-                <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                    Action
+                  Action
                 </th>
               </tr>
             </thead class="border-b">
             <tbody>
+              @foreach ($series as $serie)
               <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Title</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rating</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Public</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Edit and Delete</td>
-                
-               
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$serie->name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$serie->slug}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$serie->created_year}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <a href="{{ route('admin.seasons.index', $serie->id) }}"
+                    class="px-6 py-2 bg-blue-300 text-gray-900 hover:bg-blue-500 hover:text-gray-700 rounded shadow">Seasons</a>
+                  <x-jet-button wire:click="editSerie({{ $serie->id }})"
+                    class="text-white">Edit</x-jet-button>
+                  <x-jet-button wire:click="deleteSerie({{ $serie->id }})"
+                    class="text-white">Delete</x-jet-button>
+                </td>
+              </tr>
+               @endforeach
             </tbody>
           </table>
+        <div class="m-2 p-2">
+          {{$series->links()}}
+        </div>
         </div>
       </div>
     </div>
+    <x-jet-dialog-modal wire:model="showEdit">
+      <x-slot name="title">Edit Serie</x-slot>         
+      <x-slot name="content">
+        <div class="flex justify-center">
+          <div class="mb-3 w-full">
+            <label for="name" class="form-label inline-block mb-2 text-gray-700">Name</label>
+            <input wire:model="name" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"/>
+            @error('name')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <div class="mb-3 w-full">
+            <label for="createdYear" class="form-label inline-block mb-2 text-gray-700">Created Year</label>
+            <input wire:model="createdYear" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"/>
+            @error('createdYear')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <div class="mb-3 w-full">
+            <label for="posterPath" class="form-label inline-block mb-2 text-gray-700">Poster path</label>
+            <input wire:model="posterPath" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"/>
+            @error('posterPath')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+      </x-slot>
+      <x-slot name="footer">
+        <x-jet-button wire:click="updateSerie">Edit</x-jet-button>
+        <x-jet-button class="px-4" wire:click="closeEditSerie">Close</x-jet-button>
+      </x-slot>
+    </x-jet-dialog-model>
   </div>
-

@@ -19,6 +19,7 @@ class GenreIndex extends Component
     public $title;
     public $genreId;
     public $showEdit = false;
+    public $search = '';
 
     public function generateGenre(){
         $response = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=1d7a93431099a07e3032306e6032da45&language=fr');
@@ -68,7 +69,7 @@ class GenreIndex extends Component
     public function render()
     {
         return view('livewire.genre-index', [
-            'genres'=>Genre::paginate(10)
+            'genres' => Genre::search('title', $this->search)->paginate(10)
         ]);
     }
 }
