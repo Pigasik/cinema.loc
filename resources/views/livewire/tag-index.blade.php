@@ -3,6 +3,12 @@
         <x-jet-button wire:click="showCreateTag">Create Tag</x-jet-button>
     </div>
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-4 inline-block w-1/2 sm:px-6 lg:px-8">
+        <div class="relative">
+            <input wire:model="search" type="text" placeholder="Search by tag"
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
+        </div>
+    </div>
       <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
           <table class="w-full text-center">

@@ -12,6 +12,7 @@ class TagIndex extends Component
     public $tagName;
     public $tags = [];
     public $tagId;
+    public $search = '';
 
     public function showCreateTag()
     {
@@ -66,6 +67,8 @@ class TagIndex extends Component
 
     public function render()
     {
-        return view('livewire.tag-index');
+        return view('livewire.tag-index', [
+            'tags' => Tag::search('tag_name', $this->search)->paginate(10)
+        ]);
     }
 }

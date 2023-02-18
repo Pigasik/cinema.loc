@@ -40,7 +40,9 @@
               @foreach ($seasons as $season)
               <tr class="bg-white border-b">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$season->name}}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$season->poster_path}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <img class="w-20 h-25 rounded" src="https://www.themoviedb.org/t/p/w440_and_h660_face/{{$season->poster_path}}">
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$season->season_number}}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <a href="{{ route('admin.episodes.index', [$serie->id, $season->id]) }}"

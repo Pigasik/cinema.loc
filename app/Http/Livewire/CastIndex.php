@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class CastIndex extends Component
 {
     use WithPagination;
-    protected $key = '1d7a93431099a07e3032306e6032da45';
+    public $search = '';
     protected $rules = [
         'castName' => 'required',
         'castPoster' => 'required'
@@ -77,7 +77,7 @@ class CastIndex extends Component
     public function render()
     {
         return view('livewire.cast-index', [
-            'casts' => Cast::paginate(10)
+            'casts' => Cast::search('name', $this->search)->paginate(10)
         ]);
     }
 }
