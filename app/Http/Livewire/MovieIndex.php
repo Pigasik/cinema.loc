@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\TrailerUrl;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -27,6 +28,16 @@ class MovieIndex extends Component
     public $movieId;
     public $movie;
     public $showEdit = false;
+    public $showTrailer = false;
+    public $trailerName;
+    public $embedHtml;
+
+    protected $listeners = [
+        'tagAdd' => 'tagAdd',
+        'tagDelite' => 'tagDelite',
+        'castAdd' => 'castAdd',
+        'castDelite' => 'castDelite'
+        ];
 
     protected $rules = [
         'title' => 'required',
@@ -127,6 +138,55 @@ class MovieIndex extends Component
         $movie = Movie::findOrFail($movieId);
         $movie->delete();
         $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Movie Deleted']);
+        $this->reset();
+    }
+
+    public function showTrailer($movieId){
+        $this->movie = Movie::findOrFail($movieId);
+        $this->showTrailer = true;
+    }
+
+    public function addTrailer(){
+        $this->movie->trailers()->create([
+            'name' => $this->trailerName,
+            'embed_html' => $this->embedHtml
+        ]);
+        $this->reset();
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Trailer add']);
+    }
+
+    public function deleteTrailer($trailerId){
+        $trailer = TrailerUrl::findOrFail($trailerId);
+        $trailer->delete();
+        $this->reset();
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Trailer deleted']);
+    }
+
+    public function closeEditTrailer(){
+        $this->showTrailer = false;
+        $this->reset();
+    }
+
+    public function tagAdd()
+    {
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Tag Add']);
+        $this->reset();
+    }
+
+    public function tagDelite()
+    {
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Tag deleted']);
+        $this->reset();
+    }
+    public function castAdd()
+    {
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Cast Add']);
+        $this->reset();
+    }
+
+    public function castDelite()
+    {
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Cast deleted']);
         $this->reset();
     }
 
