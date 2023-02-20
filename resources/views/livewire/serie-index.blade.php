@@ -46,9 +46,9 @@
                   <a href="{{ route('admin.seasons.index', $serie->id) }}"
                     class="px-6 py-2 bg-blue-300 text-gray-900 hover:bg-blue-500 hover:text-gray-700 rounded shadow">Seasons</a>
                   <x-jet-button wire:click="editSerie({{ $serie->id }})"
-                    class="text-white">Edit</x-jet-button>
+                    class="bg-green-500 hover:bg-green-700 text-white text-white">Edit</x-jet-button>
                   <x-jet-button wire:click="deleteSerie({{ $serie->id }})"
-                    class="text-white">Delete</x-jet-button>
+                    class="bg-red-500 hover:bg-red-700 text-white">Delete</x-jet-button>
                 </td>
               </tr>
                @endforeach

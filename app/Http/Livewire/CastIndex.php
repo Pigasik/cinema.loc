@@ -35,9 +35,9 @@ class CastIndex extends Component
             'poster_path' => $newCast['profile_path']
         ]); 
         $this->reset();
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Cast Add']);
         } else{
             $this->dispatchBrowserEvent('banner-message', ['style' => 'denger', 'message' => 'Invalid TMDBId']);
-    
         }
     }
 

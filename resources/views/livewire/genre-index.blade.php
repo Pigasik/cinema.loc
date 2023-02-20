@@ -40,9 +40,9 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$genre->slug}}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <x-jet-button wire:click="editGenre({{ $genre->id }})"
-                    class="text-white">Edit</x-jet-button>
+                    class="bg-green-500 hover:bg-green-700 text-white text-white">Edit</x-jet-button>
                 <x-jet-button wire:click="deleteGenre({{ $genre->id }})"
-                    class="text-white">Delete</x-jet-button>
+                    class="bg-red-500 hover:bg-red-700 text-white">Delete</x-jet-button>
                 </td>
               </tr>
                @endforeach

@@ -70,9 +70,9 @@
                   <x-jet-button wire:click="showTrailer({{ $movie_t->id }})"
                     class="text-white">Trailer</x-jet-button>
                   <x-jet-button wire:click="editMovie({{ $movie_t->id }})"
-                    class="text-white">Edit</x-jet-button>
+                    class="bg-green-500 hover:bg-green-700 text-white text-white">Edit</x-jet-button>
                   <x-jet-button wire:click="deleteMovie({{ $movie_t->id }})"
-                    class="text-white">Delete</x-jet-button>
+                    class="bg-red-500 hover:bg-red-700 text-white">Delete</x-jet-button>
                 </td>
               </tr>
                @endforeach
