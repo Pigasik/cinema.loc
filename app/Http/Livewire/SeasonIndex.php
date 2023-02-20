@@ -28,12 +28,13 @@ class SeasonIndex extends Component
 
     public function generateSeason()
     {
+        $apiKey = config('services.api.key');
         $season = Season::where('season_number', $this->seasonNumber)->exists();
         if($season){
             $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Season exists']);
             return;
         }
-        $apiSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key=1d7a93431099a07e3032306e6032da45&language=en-US
+        $apiSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key='.$apiKey.'&language=en-US
                     ');
         if ($apiSeason->ok()) {
                 $newSeason = $apiSeason->json();

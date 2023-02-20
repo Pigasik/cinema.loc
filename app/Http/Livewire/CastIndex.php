@@ -21,9 +21,11 @@ class CastIndex extends Component
     public $castPoster;
     public $showEdit = false;
     public $castId;
+    
 
     public function generateCast(){
-        $newCast = Http::get('https://api.themoviedb.org/3/person/'. $this->castTMDBId .'?api_key=1d7a93431099a07e3032306e6032da45&language=en-USS')->json();
+        $apiKey = config('services.api.key');
+        $newCast = Http::get('https://api.themoviedb.org/3/person/'. $this->castTMDBId .'?api_key='.$apiKey.'&language=en-USS')->json();
         $cast = Cast::where('tmdb_id', $newCast['id'])->first();
         if(!$cast){
            Cast::create([

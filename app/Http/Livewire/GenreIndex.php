@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 class GenreIndex extends Component
 {
     use WithPagination;
-    protected $key = '1d7a93431099a07e3032306e6032da45';
     protected $rules = [
         'title' => 'required',
     ];
@@ -22,7 +21,8 @@ class GenreIndex extends Component
     public $search = '';
 
     public function generateGenre(){
-        $response = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=1d7a93431099a07e3032306e6032da45&language=fr');
+        $apiKey = config('services.api.key');
+        $response = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key='.$apiKey.'&language=fr');
         $genres = $response->json()['genres'];
         foreach ($genres as $genre) {
             Genre::create([

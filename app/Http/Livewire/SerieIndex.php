@@ -26,7 +26,8 @@ class SerieIndex extends Component
     ];
 
     public function generateSerie(){
-        $newSerie = Http::get('https://api.themoviedb.org/3/tv/'. $this->tmdbId .'?api_key=1d7a93431099a07e3032306e6032da45&language=en-US')->json();
+        $apiKey = config('services.api.key');
+        $newSerie = Http::get('https://api.themoviedb.org/3/tv/'. $this->tmdbId .'?api_key='.$apiKey.'&language=en-US')->json();
         //dd($newSerie);
         $serie = Serie::where('tmdb_id', $newSerie['id'])->first();
         if (!$serie) {

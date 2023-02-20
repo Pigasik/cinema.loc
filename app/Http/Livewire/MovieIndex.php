@@ -53,12 +53,13 @@ class MovieIndex extends Component
 
     public function generateMovie()
     {
+        $apiKey = config('services.api.key');
         $movie = Movie::where('tmdb_id', $this->tmdbId)->exists();
         if ($movie) {
             $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Movie exists']);
             return;
         }
-        $url = 'https://api.themoviedb.org/3/movie/'. $this->tmdbId .'?api_key=1d7a93431099a07e3032306e6032da45&language=en-US';
+        $url = 'https://api.themoviedb.org/3/movie/'. $this->tmdbId .'?api_key='.$apiKey.'&language=en-US';
 
         $apiMovie = Http::get($url);
 
