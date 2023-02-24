@@ -33,16 +33,16 @@
             <section class="max-w-6xl mx-auto bg-gray-200 dark:bg-gray-900 p-2 rounded">
 
                 <div class="w-4/12">
-                    <h1 class="flex text-white font-bold text-xl">Latest episodes</h1>
+                    <h1 class="flex text-white font-bold text-xl">Latest serie</h1>
                     <div class="grid grid-cols-3 gap-2">
-                        @if (!empty($latest))
-                            @foreach ($latest as $lepisode)
-                                <a href="{{ route('movies.show', $lepisode->slug) }}">
-                                    <img class="w-full h-full rounded-lg"
-                                        src="https://www.themoviedb.org/t/p/w220_and_h330_face/{{ $lepisode->season->poster_path }}">
-                                </a>
-                            @endforeach
-                        @endif
+                        @if (!empty($latests))
+                                @foreach ($latests as $lserie)
+                                    <a href="{{ route('series.show', $lserie->slug) }}">
+                                        <img class="w-full h-full rounded-lg"
+                                            src="https://www.themoviedb.org/t/p/w220_and_h330_face/{{ $lserie->poster_path }}">
+                                    </a>
+                                @endforeach
+                            @endif
                     </div>
                 </div>
                 </div>

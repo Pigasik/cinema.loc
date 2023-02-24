@@ -28,6 +28,9 @@ class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gra
     <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.tags.index') }}">
         <span class="mx-3">Tags</span>
     </a>
+    <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.users.index') }}">
+        <span class="mx-3">Users</span>
+    </a>
 
 </nav>
 </div>

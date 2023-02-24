@@ -14,18 +14,15 @@ class TagIndex extends Component
     public $tagId;
     public $search = '';
 
-    public function showCreateTag()
-    {
+    public function showCreateTag(){
         $this->showCreate = true;
     }
 
-    public function closeCreateTag()
-    {
+    public function closeCreateTag(){
         $this->showCreate = false;
     }
 
-    public function createTag()
-    {
+    public function createTag(){
         Tag::create([
           'tag_name' => $this->tagName,
           'slug' => Str::slug($this->tagName)
@@ -34,8 +31,7 @@ class TagIndex extends Component
         $this->tags = Tag::all();
     }
 
-    public function mount()
-    {
+    public function mount(){
         $this->tags = Tag::all();
     }
 
@@ -58,7 +54,7 @@ class TagIndex extends Component
         $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Tag created successfully']);
     }
 
-    public function deleteTag($tagId){
+    public function deleteUser($tagId){
         $tag = Tag::findorFail($tagId);
         $tag->delete();
         $this->tags = Tag::all();

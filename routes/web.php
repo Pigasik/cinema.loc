@@ -14,6 +14,7 @@ use App\Http\Livewire\MovieIndex;
 use App\Http\Livewire\SeasonIndex;
 use App\Http\Livewire\SerieIndex;
 use App\Http\Livewire\TagIndex;
+use App\Http\Livewire\UserIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->prefix('admin')->
     Route::get('genres', GenreIndex::class)->name('genres.index');
     Route::get('casts', CastIndex::class)->name('casts.index');
     Route::get('tags', TagIndex::class)->name('tags.index');
+    Route::get('users', UserIndex::class)->name('users.index');
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {

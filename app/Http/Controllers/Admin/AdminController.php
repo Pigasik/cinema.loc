@@ -16,6 +16,6 @@ class AdminController extends Controller
     $movies = Movie::all();
     $series = Serie::all();
     $casts = Cast::all();
-    return view('admin.index', compact('users', 'movies', 'series', 'casts'));
+    return view('admin.index', compact('users', 'movies', 'series', 'casts', 'users'));
    }
 }
