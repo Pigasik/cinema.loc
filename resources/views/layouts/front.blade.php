@@ -16,7 +16,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-<body class="font-sans antialiased">
+<body class="bg-gray-200 dark:bg-gray-700">
     <x-navbar />
     {{ $slot }}
     <x-footer />

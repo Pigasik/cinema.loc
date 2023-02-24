@@ -9,4 +9,7 @@ class Serie extends Model
 {
     use HasFactory;
     protected $fillable = ['tmdb_id', 'name', 'created_year', 'poster_path', 'slug'];
+    public function seasons(){
+        return $this->hasMany(Season::class);
+    }
 }
