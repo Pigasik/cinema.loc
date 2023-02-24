@@ -31,6 +31,6 @@ class SerieController extends Controller
     public function showEpisode(Episode $episode)
     {
         $latests = Episode::orderBy('created_at', 'desc')->take(9)->get();
-        return view('series.seasons.episodes.show', compact('episode'));
+        return view('episodes.show', compact('episode'));
     }
 }

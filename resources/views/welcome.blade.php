@@ -45,7 +45,7 @@
                                 <div class="absolute inset-0 z-10 bg-gradient-to-t from-black to-transparent"></div>
                                 <div
                                     class="absolute z-10 bottom-2 left-2 text-indigo-300 text-sm font-bold group-hover:text-blue-700">
-                                    {{ $serie->seasons_count }} Season/s
+                                    {{ $serie->seasons_count }} Seasons
                                 </div>
                             </a>
                         </x-slot>
