@@ -9,7 +9,7 @@
                                 src="https://www.themoviedb.org/t/p/w220_and_h330_face/{{ $cast->poster_path }}">
                         </a>
                     </x-slot>
-                    <a href="{{ route('casts.show', $cast->id) }}">
+                    <a href="{{ route('casts.show', $cast->slug) }}">
                         <span class="text-white">{{ $cast->name }}</span>
                     </a>
                 </x-movie-card>
