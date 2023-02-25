@@ -35,17 +35,10 @@
                 <div class="w-4/12">
                     <h1 class="flex text-white font-bold text-xl">Latest serie</h1>
                     <div class="grid grid-cols-3 gap-2">
-                        @if (!empty($latests))
-                                @foreach ($latests as $lserie)
-                                    <a href="{{ route('series.show', $lserie->slug) }}">
-                                        <img class="w-full h-full rounded-lg"
-                                            src="https://www.themoviedb.org/t/p/w220_and_h330_face/{{ $lserie->poster_path }}">
-                                    </a>
-                                @endforeach
-                            @endif
+                       
                     </div>
                 </div>
-                </div>
+               
             </section>
         </main>
     @endif
